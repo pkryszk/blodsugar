@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Measurements List</title>
+  </head>
+  <body>
+    <h1>Measurements List</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Value</th>
+        <th>Measured Date</th>
+        <th>Notes</th>
+      </tr>
+      {% for measurement in measurements %}
+      <tr>
+        <td>{{ measurement.id }}</td>
+        <td>{{ measurement.value }}</td>
+        <td>{{ measurement.measured_date }}</td>
+        <td>{{ measurement.notes }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
