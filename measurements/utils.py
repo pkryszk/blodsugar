@@ -1,8 +1,13 @@
-import csv,os,logging
-from measurements.models import Measurement
+import csv
+import logging
+import os
+
 from django.conf import settings
+
+from measurements.models import Measurement
+
 LOGGER_NAME = "measurements"
-LOGGER_FILENAME ="measurements_reader.log"
+LOGGER_FILENAME = "measurements_reader.log"
 
 logger = logging.getLogger(LOGGER_NAME)
 logger.setLevel(logging.INFO)
@@ -15,12 +20,13 @@ logger.addHandler(handler)
 
 def create_measurement(row: dict):
     try:
-        value,measured_date,notes = row
-        m = Measurement.objects.create( value=value,measured_date=measured_date,notes=notes)
+        value, measured_date, notes = row
+        m = Measurement.objects.create(value=value, measured_date=measured_date, notes=notes)
         return m
     except Exception as e:
         logger.warning(f"skipped row: {row}")
         return None
+
 
 def import_measurements(filename):
     data_file_path = os.path.join(settings.BASE_DIR, 'measurements', 'data', filename)
