@@ -1,13 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Measurements List</title>
-    <link rel="stylesheet" href  = "{% static 'measurements/style.css' %}">
-  </head>
-  <body>
-    <img src="{% static 'measurements/diabetes-control-chart.jpg' %}"} >
+{% extends "base.html" %}
+{% block title %}Measurements list{% endblock %}
+{% block content %}
     <h1>Measurements List</h1>
+
+<img src="static/measurements/diabetes-control-chart.jpg">
     <table>
       <tr>
         <th>ID</th>
@@ -15,15 +11,17 @@
         <th>Measured Date</th>
         <th>Notes</th>
       </tr>
-      {% for measurement in measurements %}
-      <tr>
+      {% for measurement in page_obj %}
+    <tr {% if measurement.value > 120 %} class="red-row"{% endif %}>
         <td>{{ measurement.id }}</td>
-        <td>{{ measurement.value }}</td>
+        <td>{{ measurement.value }} mg/dL</td>
         <td>{{ measurement.measured_date }}</td>
         <td>{{ measurement.notes }}</td>
         <td> <a href = "{% url 'measurement_delete' measurement.id %}">Delete</a> </td>
       </tr>
       {%  endfor %}
     </table>
-  </body>
-</html>
+<BR>
+      {% include 'measurements/_pagination.html' %}
+
+{% endblock %}

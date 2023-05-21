@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Measurement delete</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Measurements delete{% endblock %}
+{% block content %}
 
-{% include 'measurements/measurement_details.html' %}
+{% include 'measurements/_measurement_details.html' %}
 
 <BR>
 <form method="POST">
@@ -15,5 +11,4 @@
   <button type="submit" name="action" value="delete">Delete</button>
   <button type="submit" name="action" value="back">Cancel</button>
 </form>
-</body>
-</html>
+{% endblock %}
