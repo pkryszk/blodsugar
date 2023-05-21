@@ -5,13 +5,15 @@
     <title>Measurement delete</title>
 </head>
 <body>
+
 {% include 'measurements/measurement_details.html' %}
+
 <BR>
 <form method="POST">
   {% csrf_token %}
   <input type="hidden" name="measurement_id" value="{{ measurement.id }}">
-  <button type="submit" name="action" value="delete">Usuń</button>
-  <button type="submit" name="action" value="back">Powrót</button>
+  <button type="submit" name="action" value="delete">Delete</button>
+  <button type="submit" name="action" value="back">Cancel</button>
 </form>
 </body>
 </html>
