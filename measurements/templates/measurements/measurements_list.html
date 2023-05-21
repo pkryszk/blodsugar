@@ -18,9 +18,9 @@
         <td>{{ measurement.value }}</td>
         <td>{{ measurement.measured_date }}</td>
         <td>{{ measurement.notes }}</td>
-        <td> <a href = "/measurements/{{measurement.id}}/delete/">Delete</a> </td>
+        <td> <a href = "{% url 'measurement_delete' measurement.id %}">Delete</a> </td>
       </tr>
-      {% endfor %}
+      {%  endfor %}
     </table>
   </body>
 </html>
