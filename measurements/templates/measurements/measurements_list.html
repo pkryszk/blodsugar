@@ -14,13 +14,13 @@
         <th>Notes</th>
       </tr>
       {% for measurement in page_obj %}
-    <tr {% if measurement.value > 120 %} class="red-row"{% endif %}>
-        <td>{{ measurement.id }}</td>
-        <td>{{ measurement.value }} mg/dL</td>
-        <td>{{ measurement.measured_date }}</td>
-        <td>{{ measurement.notes }}</td>
-        <td> <a href = "{% url 'measurement_delete' measurement.id %}?ret_page={{page_obj.number}}">Delete</a> </td>
-      </tr>
+        <tr {% if measurement.value > 120 %} class="red-row"{% endif %}>
+          <td>{{ measurement.id }}</td>
+          <td>{{ measurement.value }} mg/dL</td>
+          <td>{{ measurement.measured_date }}</td>
+          <td>{{ measurement.notes }}</td>
+          <td> <a href = "{% url 'measurement_delete' measurement.id %}?ret_page={{page_obj.number}}">Delete</a> </td>
+        </tr>
 
       {%  endfor %}
     </table>
