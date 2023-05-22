@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Measurements list{% endblock %}
 {% block content %}
-    <h1>Measurements List</h1>
+    <h1>Measurements List </h1>
 
-<img src="static/measurements/diabetes-control-chart.jpg">
+{%if chart %}
+<img src="data:/image/png;base64,{{chart|safe}}">
+{% endif %}
     <table>
       <tr>
         <th>ID</th>
@@ -17,8 +19,9 @@
         <td>{{ measurement.value }} mg/dL</td>
         <td>{{ measurement.measured_date }}</td>
         <td>{{ measurement.notes }}</td>
-        <td> <a href = "{% url 'measurement_delete' measurement.id %}">Delete</a> </td>
+        <td> <a href = "{% url 'measurement_delete' measurement.id %}?ret_page={{page_obj.number}}">Delete</a> </td>
       </tr>
+
       {%  endfor %}
     </table>
 <BR>

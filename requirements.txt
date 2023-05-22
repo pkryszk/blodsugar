@@ -1,3 +1,4 @@
-django
+django~=4.2.1
 requests
 faker
+matplotlib~=3.7.1

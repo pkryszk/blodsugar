@@ -2,9 +2,12 @@ import csv
 import logging
 import os
 
-from django.conf import settings
 
+from django.conf import settings
 from measurements.models import Measurement
+import base64
+import matplotlib.pyplot as plt
+from io import BytesIO
 
 LOGGER_NAME = "measurements"
 LOGGER_FILENAME = "measurements_reader.log"
@@ -41,3 +44,33 @@ def import_measurements(filename):
                 created_measurements += 1
             num_of_rows += 1
         logger.info(f"Processed {num_of_rows} rows, created {created_measurements} measurements")
+
+
+
+
+def get_graph():
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_png = buffer.getvalue()
+    graph = base64.b64encode(image_png)
+    graph = graph.decode('utf-8')
+    buffer.close()
+    return graph
+
+
+def get_plot(x,y):
+    plt.switch_backend('AGG')
+#    plt.figure(figsize(200,100))
+    plt.title('')
+    plt.xlabel('date')
+    plt.ylabel('mg/dL')
+    plt.xticks(rotation=45)
+    threshold = 120
+    plt.axhline(y=threshold, color='red', linestyle='--', label='high sugar')
+    plt.plot(x, y,label='sugar level')
+    plt.tight_layout()
+    plt.legend()
+    graph = get_graph()
+    return graph
+

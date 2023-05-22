@@ -3,11 +3,10 @@
 {% block content %}
 
 {% include 'measurements/_measurement_details.html' %}
-
 <BR>
 <form method="POST">
   {% csrf_token %}
-  <input type="hidden" name="measurement_id" value="{{ measurement.id }}">
+  <input type="hidden" name="measurement_id" value="{{ ret_page }}">
   <button type="submit" name="action" value="delete">Delete</button>
   <button type="submit" name="action" value="back">Cancel</button>
 </form>
